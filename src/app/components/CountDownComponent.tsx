@@ -26,7 +26,7 @@ export default function CountDownComponent() {
       return <Completionist />;
     } else {
       return (
-        <div className={`flex items-center gap-5 ${redHat}`}>
+        <div className={`flex items-center gap-5 z-40 ${redHat}`}>
           <Card number={days} type="days" />
           <Card number={hours} type="hours" />
           <Card number={minutes} type="minutes" />
