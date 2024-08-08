@@ -19,7 +19,10 @@ export default function RootLayout({
       lang="en"
       className="bg-gradient-to-t from-[#241C2B] via-[#211D2B] to-[#1E1E28]"
     >
-      <body className={inter.className}>{children}</body>
+      <body className={inter.className}>
+        <link rel="icon" href="/images/favicon-32x32.png" sizes="any" />
+        <div className="">{children}</div>
+      </body>
     </html>
   );
 }

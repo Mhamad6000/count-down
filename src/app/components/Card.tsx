@@ -7,39 +7,49 @@ export default function Card({
   number: number;
   type: "days" | "hours" | "minutes" | "seconds";
 }) {
-  const [prevNumber, setPrevNumber] = useState(number);
-  const cardRef = useRef<HTMLDivElement>(null);
-
+  function changeToTwoDigits(num: number): string {
+    return num < 0 ? "00" : num < 10 ? `0${num}` : String(num);
+  }
+  const [prevNumber, setPrevNumber] = useState<number>(number);
+  const topHalfRef = useRef<HTMLDivElement>(null);
+  const bottomHalfRef = useRef<HTMLDivElement>(null);
+  const flipCard = useRef<HTMLDivElement>(null);
   useEffect(() => {
     if (number !== prevNumber) {
-      cardRef.current?.classList.add("flip");
-      const timer = setTimeout(() => {
-        cardRef.current?.classList.remove("flip");
-        setPrevNumber(number); // Update prevNumber after the flip
-      }, 600); // Duration should match the animation duration
-      return () => clearTimeout(timer);
+      console.log("Number has changed!");
+      if (flipCard.current) {
+        flipCard.current.classList.add("flip");
+
+        setTimeout(() => {
+          flipCard.current?.classList.remove("flip");
+        }, 500);
+      }
+      setPrevNumber(number);
     }
   }, [number, prevNumber]);
 
   return (
-    <div className="relative w-32 h-36 bg-[#34364F]">
-      <div className=" text-custom-soft-red text-8xl text-center countdown__digits count-down-top">
-        {number < 10 ? `0${number}` : number}
-      </div>
-
-      <div className="card " ref={cardRef}>
-        <div className="card-inner countdown__digits">
-          <div className="card-front bg-[#34364F] text-custom-soft-red text-8xl text-center">
-            {prevNumber < 10 ? `0${prevNumber}` : prevNumber}
+    <div className="">
+      <div className="relative overflow-hidden custom-shadow mb-5 red-hat-text-700">
+        <div className="absolute left-0 top-1/2 -translate-y-1/2 bg-[#171721] z-10 w-3 h-3 md:w-4 md:h-4 rounded-full -translate-x-2"></div>
+        <div
+          before-content={changeToTwoDigits(number)}
+          after-content={changeToTwoDigits(number)}
+          ref={flipCard}
+          className="flip-card text-4xl sm:text-5xl md:text-8xl "
+        >
+          <div className="top" ref={topHalfRef}>
+            {changeToTwoDigits(number)}
           </div>
-          <div className="card-back bg-[#34364F] text-custom-soft-red text-8xl text-center">
-            {number - 1 < 10 ? `0${number - 1}` : number - 1}
+          <div className="bottom" ref={bottomHalfRef}>
+            {changeToTwoDigits(number)}
           </div>
         </div>
+        <div className="absolute right-0 top-1/2 -translate-y-1/2 bg-[#171721] z-10 w-3 h-3 md:w-4 md:h-4 rounded-full translate-x-2"></div>
       </div>
-      <div className=" text-custom-soft-red text-8xl text-center countdown__digits count-down-bottom">
-        {number < 10 ? `0${number}` : number}
-      </div>
+      <p className="text-custom-grayish-blue text-center text-[12px] md:text-lg uppercase tracking-widest">
+        {type}
+      </p>
     </div>
   );
 }

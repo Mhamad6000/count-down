@@ -4,7 +4,7 @@ import Link from "next/link";
 export default function BottomHills() {
   const links = [
     {
-      href: "www.facebook.com",
+      href: "https://www.facebook.com/mhamad.othman.3367",
       icon: (
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24">
           <path
@@ -15,7 +15,7 @@ export default function BottomHills() {
       ),
     },
     {
-      href: "www.paint.com",
+      href: "https://www.pinterest.com/",
       icon: (
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24">
           <path
@@ -26,7 +26,7 @@ export default function BottomHills() {
       ),
     },
     {
-      href: "www.instagram.com",
+      href: "https://www.instagram.com/",
       icon: (
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24">
           <path
@@ -47,7 +47,7 @@ export default function BottomHills() {
         src={"/images/pattern-hills.svg"}
         className=" object-cover small-screen-object-position md:object-center w-full absolute h-full "
       />
-      <div className="flex relative justify-center items-center gap-7 z-40 absolute left-0 bottom-0 w-full h-full translate-y-9">
+      <div className="flex justify-center items-center gap-7 z-40 absolute left-0 bottom-0 w-full h-full translate-y-8">
         {links?.map((singleLink, index) => {
           return (
             <Link
